@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Spatial.gd" type="Script" id=1]
+[ext_resource path="res://SabethaTimer.gd" type="Script" id=1]
 [ext_resource path="res://shaders/range_indicators.shader" type="Shader" id=2]
 [ext_resource path="res://burrito.png" type="Texture" id=3]
 [ext_resource path="res://Route2D.tscn" type="PackedScene" id=4]
@@ -12,6 +12,7 @@
 [ext_resource path="res://icon_new_path.png" type="Texture" id=10]
 [ext_resource path="res://icon_new_point.png" type="Texture" id=11]
 [ext_resource path="res://SettingsDialog.gd" type="Script" id=12]
+[ext_resource path="res://Spatial.gd" type="Script" id=13]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -48,7 +49,7 @@ shader_param/custom_7 = false
 shader_param/custom_7_value = 500.0
 
 [node name="Spatial" type="Spatial"]
-script = ExtResource( 1 )
+script = ExtResource( 13 )
 
 [node name="CameraMount" type="Spatial" parent="."]
 
@@ -85,17 +86,11 @@ margin_top = 3.18198
 margin_right = 26.591
 margin_bottom = 28.182
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="main_menu_toggle" type="Button" parent="Control/GlobalMenuButton"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 27.0
 margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EditorQuckPanel" type="PanelContainer" parent="Control/GlobalMenuButton"]
 visible = false
@@ -185,23 +180,20 @@ margin_bottom = 672.0
 window_title = "Open a File"
 mode = 0
 access = 2
-current_dir = "."
-current_file = "."
-current_path = "."
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainMenu" type="WindowDialog" parent="Control/Dialogs"]
-margin_left = 39.0
-margin_top = 71.0
-margin_right = 252.0
-margin_bottom = 583.0
+visible = true
+margin_left = 37.9405
+margin_top = 93.2487
+margin_right = 250.941
+margin_bottom = 605.249
 window_title = "Main Menu"
 resizable = true
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Dialogs/MainMenu"]
@@ -213,7 +205,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Dialogs/MainMenu/ScrollContainer"]
 margin_right = 213.0
-margin_bottom = 284.0
+margin_bottom = 308.0
 size_flags_horizontal = 3
 
 [node name="LoadPath" type="Button" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
@@ -277,15 +269,21 @@ margin_bottom = 232.0
 rect_min_size = Vector2( 0, 40 )
 text = "Guacamole Script Editor"
 
-[node name="HSeparator4" type="HSeparator" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
+[node name="TimersButton" type="Button" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
 margin_top = 192.0
 margin_right = 213.0
-margin_bottom = 196.0
+margin_bottom = 212.0
+text = "Open Timers"
+
+[node name="HSeparator4" type="HSeparator" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 213.0
+margin_bottom = 220.0
 
 [node name="Settings" type="Button" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
-margin_top = 200.0
+margin_top = 224.0
 margin_right = 213.0
-margin_bottom = 240.0
+margin_bottom = 264.0
 rect_min_size = Vector2( 0, 40 )
 text = "Settings"
 
@@ -311,9 +309,9 @@ margin_bottom = 308.0
 text = "Active Path"
 
 [node name="ExitButton" type="Button" parent="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer"]
-margin_top = 244.0
+margin_top = 268.0
 margin_right = 213.0
-margin_bottom = 284.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 0, 40 )
 text = "Exit Burrito"
 
@@ -484,9 +482,6 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png" )
-current_dir = "."
-current_file = "."
-current_path = "."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -499,9 +494,6 @@ margin_bottom = 624.833
 window_title = "Save Path"
 resizable = true
 access = 2
-current_dir = "."
-current_file = "."
-current_path = "."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -512,9 +504,6 @@ margin_top = 229.0
 margin_right = 564.0
 margin_bottom = 538.0
 window_title = "Node Editor"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Dialogs/NodeEditorDialog"]
 anchor_right = 1.0
@@ -604,7 +593,6 @@ disabled = true
 text = "Reverse Path Direction"
 
 [node name="SettingsDialog" type="WindowDialog" parent="Control/Dialogs"]
-visible = true
 margin_left = 592.0
 margin_top = 146.0
 margin_right = 981.0
@@ -628,8 +616,8 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="Control/Dialogs/SettingsDialog/ScrollContainer"]
-margin_right = 384.002
-margin_bottom = 419.001
+margin_right = 384.0
+margin_bottom = 419.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
@@ -776,6 +764,47 @@ margin_right = 384.0
 margin_bottom = 304.0
 text = "Load Lutris Profile"
 
+[node name="SabethaTimerDialog" type="WindowDialog" parent="Control/Dialogs"]
+visible = true
+margin_left = 560.0
+margin_top = 63.0
+margin_right = 768.0
+margin_bottom = 190.0
+window_title = "Sabetha Timer"
+script = ExtResource( 1 )
+
+[node name="GridContainer" type="GridContainer" parent="Control/Dialogs/SabethaTimerDialog"]
+margin_left = 3.94054
+margin_top = 5.05946
+margin_right = 188.941
+margin_bottom = 56.0595
+columns = 2
+
+[node name="SabethaTimerPrimeBtn" type="Button" parent="Control/Dialogs/SabethaTimerDialog/GridContainer"]
+margin_right = 89.0
+margin_bottom = 20.0
+hint_tooltip = "Primes the timer so that it will start upon entering combat"
+text = "Prime timer"
+
+[node name="SabethaTimerStatusLbl" type="Label" parent="Control/Dialogs/SabethaTimerDialog/GridContainer"]
+margin_left = 93.0
+margin_top = 3.0
+margin_right = 173.0
+margin_bottom = 17.0
+text = "Timer status"
+
+[node name="SabethaTimerResetBtn" type="Button" parent="Control/Dialogs/SabethaTimerDialog/GridContainer"]
+margin_top = 24.0
+margin_right = 89.0
+margin_bottom = 44.0
+text = "Reset Timer"
+
+[node name="CombatStatusLbl" type="Label" parent="Control/Dialogs/SabethaTimerDialog/GridContainer"]
+margin_left = 93.0
+margin_top = 27.0
+margin_right = 173.0
+margin_bottom = 41.0
+
 [node name="Border" type="Control" parent="Control"]
 visible = false
 anchor_right = 1.0
@@ -843,6 +872,13 @@ anchor_bottom = 1.0
 margin_top = -6.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="TimerTextLabel" type="RichTextLabel" parent="Control"]
+margin_left = 333.762
+margin_top = 148.125
+margin_right = 1249.76
+margin_bottom = 226.125
+text = "Sus Amogus"
+
 [node name="Paths" type="Spatial" parent="."]
 
 [node name="Icons" type="Spatial" parent="."]
@@ -869,6 +905,7 @@ material/0 = SubResource( 4 )
 [connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/SavePath" to="." method="_on_SavePath_pressed"]
 [connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/OpenEditorQuickPanel" to="." method="_on_OpenEditorQuickPanel_pressed"]
 [connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/Ranges" to="." method="_on_RangesButton_pressed"]
+[connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/TimersButton" to="Control/Dialogs/SabethaTimerDialog" method="_on_TimersButton_pressed"]
 [connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Control/Dialogs/MainMenu/ScrollContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="hide" from="Control/Dialogs/RangesDialog" to="." method="_on_Dialog_hide"]
@@ -907,3 +944,4 @@ material/0 = SubResource( 4 )
 [connection signal="pressed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/AutoLaunchBurritoLink" to="Control/Dialogs/SettingsDialog" method="save_settings"]
 [connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/WinePath" to="Control/Dialogs/SettingsDialog" method="save_settings"]
 [connection signal="text_changed" from="Control/Dialogs/SettingsDialog/ScrollContainer/GridContainer/EnvironmentVars" to="Control/Dialogs/SettingsDialog" method="save_settings"]
+[connection signal="pressed" from="Control/Dialogs/SabethaTimerDialog/GridContainer/SabethaTimerPrimeBtn" to="Control/Dialogs/SabethaTimerDialog" method="_on_SabethaTimerPrimeBtn_pressed"]
